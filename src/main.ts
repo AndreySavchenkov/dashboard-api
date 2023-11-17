@@ -5,11 +5,15 @@ import { LoggerService } from './logger/logger.service';
 import { UserController } from './users/users.controller';
 import { ILogger } from './logger/logger.interface';
 import { TYPES } from './types';
+import { IUserService } from './users/user.service.interface';
+import { UserService } from './users/users.service';
+import { IUsersController } from './users/users.controller.interface';
 
 export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
 	bind<ILogger>(TYPES.ILogger).to(LoggerService);
 	bind<ExceptionFilter>(TYPES.ExceptionFilter).to(ExceptionFilter);
-	bind<UserController>(TYPES.UserController).to(UserController);
+	bind<IUsersController>(TYPES.UserController).to(UserController);
+	bind<IUserService>(TYPES.UserService).to(UserService);
 	bind<App>(TYPES.Application).to(App);
 });
 

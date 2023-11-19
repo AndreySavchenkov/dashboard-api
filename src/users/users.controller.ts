@@ -34,6 +34,12 @@ export class UserController extends BaseController implements IUsersController {
 				func: this.login,
 				middlewares: [new ValidateMiddleware(UserLoginDto)],
 			},
+			{
+				path: '/info',
+				method: 'get',
+				func: this.info,
+				middlewares: [],
+			},
 		]);
 	}
 
@@ -83,5 +89,9 @@ export class UserController extends BaseController implements IUsersController {
 				},
 			);
 		});
+	}
+
+	async info({ user }: Request, res: Response, next: NextFunction): Promise<void> {
+		this.ok(res, { email: user });
 	}
 }
